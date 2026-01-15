@@ -275,7 +275,7 @@
         <div class="service-card bg-card border border-border rounded-2xl p-8">
           <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
             <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v4m0 2h.01M6 13h.01M6 16h.01V18M5 20h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v11a2 2 0 002 2z"></path>
             </svg>
           </div>
           <h3 class="text-xl font-semibold mb-3">Gestion de Parc</h3>
@@ -377,7 +377,7 @@
           <div class="bg-background border border-border rounded-xl p-6 text-center">
             <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
               <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
             </div>
             <p class="text-sm font-medium">Linux</p>
@@ -529,6 +529,13 @@
               <label for="message" class="block text-sm font-medium mb-2">Message</label>
               <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 bg-muted border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none" placeholder="Décrivez votre projet ou votre besoin..."></textarea>
             </div>
+            <!-- Ajout de la case à cocher RGPD obligatoire -->
+            <div class="flex items-start gap-3">
+              <input type="checkbox" id="rgpd-consent" name="rgpd-consent" required class="mt-1 w-4 h-4 bg-muted border-border rounded focus:ring-primary focus:ring-2 accent-primary">
+              <label for="rgpd-consent" class="text-sm text-muted-foreground">
+                J'accepte que mes données soient traitées conformément à la <a href="politique-confidentialite.html" class="text-primary hover:underline">politique de confidentialité</a>. Ces données seront utilisées uniquement pour répondre à ma demande. <span class="text-red-500">*</span>
+              </label>
+            </div>
             <button type="submit" class="w-full bg-primary text-primary-foreground py-3 px-6 rounded-lg font-medium hover:bg-primary/90 transition-colors flex items-center justify-center gap-2">
               Envoyer le message
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -563,11 +570,16 @@
           <span class="text-lg font-bold">S.A.S Engine Irie</span>
         </div>
         
-        <div class="flex items-center gap-6">
+        <!-- Ajout des liens légaux RGPD dans le footer -->
+        <div class="flex flex-wrap items-center justify-center gap-6">
           <a href="#services" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Services</a>
           <a href="#expertise" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Expertise</a>
           <a href="#about" class="text-sm text-muted-foreground hover:text-foreground transition-colors">À propos</a>
           <a href="#contact" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+          <span class="hidden sm:inline text-border">|</span>
+          <a href="mentions-legales.html" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Mentions légales</a>
+          <a href="politique-confidentialite.html" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Confidentialité</a>
+          <a href="politique-cookies.html" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Cookies</a>
         </div>
         
         <p class="text-sm text-muted-foreground">
@@ -576,6 +588,84 @@
       </div>
     </div>
   </footer>
+
+  <!-- Bannière de consentement aux cookies RGPD -->
+  <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border p-4 hidden">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-sm text-muted-foreground text-center sm:text-left">
+        <p>Nous utilisons des cookies pour améliorer votre expérience. En continuant, vous acceptez notre 
+          <a href="politique-cookies.html" class="text-primary hover:underline">politique de cookies</a>.
+        </p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="cookie-reject" class="px-4 py-2 text-sm border border-border rounded-lg hover:bg-muted transition-colors">
+          Refuser
+        </button>
+        <button id="cookie-accept" class="px-4 py-2 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+          Accepter
+        </button>
+        <button id="cookie-settings" class="px-4 py-2 text-sm border border-border rounded-lg hover:bg-muted transition-colors">
+          Paramétrer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de paramétrage des cookies -->
+  <div id="cookie-modal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-background/80 backdrop-blur-sm" id="cookie-modal-overlay"></div>
+    <div class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-card border border-border rounded-2xl p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-xl font-semibold">Paramètres des cookies</h3>
+        <button id="cookie-modal-close" class="p-2 text-muted-foreground hover:text-foreground">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="space-y-4">
+        <div class="p-4 bg-muted rounded-lg">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-medium">Cookies essentiels</span>
+            <span class="text-xs text-muted-foreground bg-primary/20 text-primary px-2 py-1 rounded">Toujours actifs</span>
+          </div>
+          <p class="text-sm text-muted-foreground">Ces cookies sont nécessaires au fonctionnement du site et ne peuvent pas être désactivés.</p>
+        </div>
+        
+        <div class="p-4 bg-muted rounded-lg">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-medium">Cookies analytiques</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="cookie-analytics" class="sr-only peer">
+              <div class="w-11 h-6 bg-border peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+            </label>
+          </div>
+          <p class="text-sm text-muted-foreground">Nous aident à comprendre comment vous utilisez le site pour l'améliorer.</p>
+        </div>
+        
+        <div class="p-4 bg-muted rounded-lg">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-medium">Cookies marketing</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="cookie-marketing" class="sr-only peer">
+              <div class="w-11 h-6 bg-border peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+            </label>
+          </div>
+          <p class="text-sm text-muted-foreground">Utilisés pour vous proposer des publicités pertinentes.</p>
+        </div>
+      </div>
+      
+      <div class="flex gap-3 mt-6">
+        <button id="cookie-save-settings" class="flex-1 bg-primary text-primary-foreground py-2 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+          Enregistrer mes choix
+        </button>
+        <button id="cookie-accept-all" class="flex-1 border border-border py-2 rounded-lg font-medium hover:bg-muted transition-colors">
+          Tout accepter
+        </button>
+      </div>
+    </div>
+  </div>
 
   <script>
     // Mobile menu toggle
@@ -647,6 +737,97 @@
       card.style.transition = 'all 0.5s ease-out';
       observer.observe(card);
     });
+
+    const cookieBanner = document.getElementById('cookie-banner');
+    const cookieModal = document.getElementById('cookie-modal');
+    const cookieModalOverlay = document.getElementById('cookie-modal-overlay');
+    const cookieModalClose = document.getElementById('cookie-modal-close');
+    const cookieAccept = document.getElementById('cookie-accept');
+    const cookieReject = document.getElementById('cookie-reject');
+    const cookieSettings = document.getElementById('cookie-settings');
+    const cookieSaveSettings = document.getElementById('cookie-save-settings');
+    const cookieAcceptAll = document.getElementById('cookie-accept-all');
+    const cookieAnalytics = document.getElementById('cookie-analytics');
+    const cookieMarketing = document.getElementById('cookie-marketing');
+
+    // Vérifier si l'utilisateur a déjà fait un choix
+    function checkCookieConsent() {
+      const consent = localStorage.getItem('cookie-consent');
+      if (!consent) {
+        cookieBanner.classList.remove('hidden');
+      } else {
+        const preferences = JSON.parse(consent);
+        if (preferences.analytics) {
+          // Charger les scripts analytiques ici
+        }
+        if (preferences.marketing) {
+          // Charger les scripts marketing ici
+        }
+      }
+    }
+
+    // Sauvegarder les préférences
+    function saveCookiePreferences(preferences) {
+      localStorage.setItem('cookie-consent', JSON.stringify(preferences));
+      localStorage.setItem('cookie-consent-date', new Date().toISOString());
+      cookieBanner.classList.add('hidden');
+      cookieModal.classList.add('hidden');
+
+      // Recharger les scripts en fonction des préférences
+      if (preferences.analytics) {
+        // Charger les scripts analytiques ici
+      } else {
+        // Supprimer ou désactiver les scripts analytiques si nécessaire
+      }
+      if (preferences.marketing) {
+        // Charger les scripts marketing ici
+      } else {
+        // Supprimer ou désactiver les scripts marketing si nécessaire
+      }
+    }
+
+    // Événements cookies
+    cookieAccept.addEventListener('click', () => {
+      saveCookiePreferences({ essential: true, analytics: true, marketing: true });
+    });
+
+    cookieReject.addEventListener('click', () => {
+      saveCookiePreferences({ essential: true, analytics: false, marketing: false });
+    });
+
+    cookieSettings.addEventListener('click', () => {
+      cookieModal.classList.remove('hidden');
+      // Charger les préférences actuelles dans le modal
+      const consent = localStorage.getItem('cookie-consent');
+      if (consent) {
+        const preferences = JSON.parse(consent);
+        cookieAnalytics.checked = preferences.analytics;
+        cookieMarketing.checked = preferences.marketing;
+      }
+    });
+
+    cookieModalClose.addEventListener('click', () => {
+      cookieModal.classList.add('hidden');
+    });
+
+    cookieModalOverlay.addEventListener('click', () => {
+      cookieModal.classList.add('hidden');
+    });
+
+    cookieSaveSettings.addEventListener('click', () => {
+      saveCookiePreferences({
+        essential: true,
+        analytics: cookieAnalytics.checked,
+        marketing: cookieMarketing.checked
+      });
+    });
+
+    cookieAcceptAll.addEventListener('click', () => {
+      saveCookiePreferences({ essential: true, analytics: true, marketing: true });
+    });
+
+    // Initialiser au chargement
+    checkCookieConsent();
   </script>
 
 </body>
