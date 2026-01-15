@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S.A.S Engine Irie - Solutions IT & Développement</title>
+  <meta name="description" content="Administration d'Infrastructure réseau, Développement web et Applications, Formation, Conseil, Gestion de Parc, Support utilisateur en Guyane française.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#0a0a0a',
+            foreground: '#fafafa',
+            card: '#141414',
+            'card-foreground': '#fafafa',
+            primary: '#0ea5e9',
+            'primary-foreground': '#0a0a0a',
+            secondary: '#1e293b',
+            'secondary-foreground': '#fafafa',
+            muted: '#1e1e1e',
+            'muted-foreground': '#a1a1aa',
+            accent: '#0ea5e9',
+            border: '#27272a',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .gradient-text {
+      background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .service-card {
+      transition: all 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: #0ea5e9;
+    }
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #0ea5e9;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    .animate-delay-100 { animation-delay: 0.1s; }
+    .animate-delay-200 { animation-delay: 0.2s; }
+    .animate-delay-300 { animation-delay: 0.3s; }
+    .animate-delay-400 { animation-delay: 0.4s; }
+  </style>
+</head>
+<body class="bg-background text-foreground font-sans antialiased">
+
+  <!-- Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <span class="text-xl font-bold">Engine Irie</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#services" class="nav-link text-sm text-muted-foreground hover:text-foreground transition-colors">Services</a>
+          <a href="#expertise" class="nav-link text-sm text-muted-foreground hover:text-foreground transition-colors">Expertise</a>
+          <a href="#about" class="nav-link text-sm text-muted-foreground hover:text-foreground transition-colors">À propos</a>
+          <a href="#contact" class="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">Contact</a>
+        </div>
+
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 text-muted-foreground hover:text-foreground">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4">
+        <div class="flex flex-col gap-4">
+          <a href="#services" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Services</a>
+          <a href="#expertise" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Expertise</a>
+          <a href="#about" class="text-sm text-muted-foreground hover:text-foreground transition-colors">À propos</a>
+          <a href="#contact" class="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium text-center hover:bg-primary/90 transition-colors">Contact</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center pt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Left Content -->
+        <div class="opacity-0 animate-fade-in-up">
+          <p class="text-primary font-medium mb-4">S.A.S Engine Irie</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            Votre partenaire
+            <span class="gradient-text">technologique</span>
+            de confiance
+          </h1>
+          <p class="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
+            Solutions informatiques complètes pour les entreprises en Guyane française. 
+            De l'infrastructure réseau au développement d'applications sur mesure.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+              Demander un devis
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+            <a href="#services" class="inline-flex items-center justify-center gap-2 border border-border text-foreground px-6 py-3 rounded-lg font-medium hover:bg-muted transition-colors">
+              Découvrir nos services
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Content - Stats -->
+        <div class="grid grid-cols-2 gap-4 opacity-0 animate-fade-in-up animate-delay-200">
+          <div class="bg-card border border-border rounded-2xl p-6">
+            <p class="text-3xl lg:text-4xl font-bold text-primary mb-2">15+</p>
+            <p class="text-muted-foreground text-sm">Années d'expérience</p>
+          </div>
+          <div class="bg-card border border-border rounded-2xl p-6">
+            <p class="text-3xl lg:text-4xl font-bold text-primary mb-2">200+</p>
+            <p class="text-muted-foreground text-sm">Projets réalisés</p>
+          </div>
+          <div class="bg-card border border-border rounded-2xl p-6">
+            <p class="text-3xl lg:text-4xl font-bold text-primary mb-2">98%</p>
+            <p class="text-muted-foreground text-sm">Clients satisfaits</p>
+          </div>
+          <div class="bg-card border border-border rounded-2xl p-6">
+            <p class="text-3xl lg:text-4xl font-bold text-primary mb-2">24/7</p>
+            <p class="text-muted-foreground text-sm">Support disponible</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-20 lg:py-32 border-t border-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-primary font-medium mb-4">Nos services</p>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+          Des solutions complètes pour<br class="hidden sm:block">
+          <span class="gradient-text">votre entreprise</span>
+        </h2>
+        <p class="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          Notre gamme de services couvre tous vos besoins informatiques, de l'infrastructure réseau au développement d'applications personnalisées.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Service 1 -->
+        <div class="service-card bg-card border border-border rounded-2xl p-8">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Administration Infrastructure Réseau</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed mb-4">
+            Configuration, maintenance et optimisation de vos infrastructures réseau pour une performance maximale et une sécurité renforcée.
+          </p>
+          <a href="#contact" class="inline-flex items-center text-primary text-sm font-medium hover:underline">
+            En savoir plus
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card bg-card border border-border rounded-2xl p-8">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Développement Web & Applications</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed mb-4">
+            Création de sites web modernes et d'applications métiers sur mesure pour répondre aux besoins spécifiques de votre activité.
+          </p>
+          <a href="#contact" class="inline-flex items-center text-primary text-sm font-medium hover:underline">
+            En savoir plus
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card bg-card border border-border rounded-2xl p-8">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Formation</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed mb-4">
+            Programmes de formation adaptés pour vos équipes : bureautique, cybersécurité, outils collaboratifs et solutions métiers.
+          </p>
+          <a href="#contact" class="inline-flex items-center text-primary text-sm font-medium hover:underline">
+            En savoir plus
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card bg-card border border-border rounded-2xl p-8">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Conseil</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed mb-4">
+            Accompagnement stratégique pour votre transformation digitale, audit de sécurité et optimisation de vos processus IT.
+          </p>
+          <a href="#contact" class="inline-flex items-center text-primary text-sm font-medium hover:underline">
+            En savoir plus
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="service-card bg-card border border-border rounded-2xl p-8">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Gestion de Parc</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed mb-4">
+            Inventaire, suivi et maintenance de votre parc informatique. Gestion des licences et planification des renouvellements.
+          </p>
+          <a href="#contact" class="inline-flex items-center text-primary text-sm font-medium hover:underline">
+            En savoir plus
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="service-card bg-card border border-border rounded-2xl p-8">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Support Utilisateur</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed mb-4">
+            Assistance technique réactive pour vos utilisateurs. Helpdesk, dépannage à distance et interventions sur site.
+          </p>
+          <a href="#contact" class="inline-flex items-center text-primary text-sm font-medium hover:underline">
+            En savoir plus
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expertise Section -->
+  <section id="expertise" class="py-20 lg:py-32 bg-card border-y border-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <p class="text-primary font-medium mb-4">Notre expertise</p>
+          <h2 class="text-3xl sm:text-4xl font-bold mb-6">
+            Une approche <span class="gradient-text">humaine</span> de la technologie
+          </h2>
+          <p class="text-muted-foreground leading-relaxed mb-8">
+            Chez Engine Irie, nous croyons que la technologie doit servir l'humain. Notre équipe d'experts combine compétences techniques et sens de l'écoute pour vous accompagner dans tous vos projets informatiques.
+          </p>
+          
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-1">Expertise locale</h4>
+                <p class="text-muted-foreground text-sm">Basés en Guyane française, nous comprenons les enjeux spécifiques de votre territoire.</p>
+              </div>
+            </div>
+            
+            <div class="flex gap-4">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-1">Solutions sur mesure</h4>
+                <p class="text-muted-foreground text-sm">Chaque projet est unique. Nous adaptons nos solutions à vos besoins réels.</p>
+              </div>
+            </div>
+            
+            <div class="flex gap-4">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-1">Support réactif</h4>
+                <p class="text-muted-foreground text-sm">Une équipe disponible et à l'écoute pour résoudre vos problèmes rapidement.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech Stack Grid -->
+        <div class="grid grid-cols-3 gap-4">
+          <div class="bg-background border border-border rounded-xl p-6 text-center">
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium">Windows Server</p>
+          </div>
+          <div class="bg-background border border-border rounded-xl p-6 text-center">
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium">Linux</p>
+          </div>
+          <div class="bg-background border border-border rounded-xl p-6 text-center">
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium">Cloud</p>
+          </div>
+          <div class="bg-background border border-border rounded-xl p-6 text-center">
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium">Cybersécurité</p>
+          </div>
+          <div class="bg-background border border-border rounded-xl p-6 text-center">
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium">Bases de données</p>
+          </div>
+          <div class="bg-background border border-border rounded-xl p-6 text-center">
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium">Réseaux</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 lg:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-primary font-medium mb-4">À propos</p>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6">
+          Qui sommes-nous ?
+        </h2>
+        <p class="text-muted-foreground leading-relaxed mb-8">
+          S.A.S Engine Irie est une société de services informatiques basée en Guyane française. 
+          Notre mission est d'accompagner les entreprises locales dans leur transformation numérique 
+          en proposant des solutions adaptées à leurs besoins et à leur budget.
+        </p>
+        <p class="text-muted-foreground leading-relaxed">
+          Forts de notre expertise technique et de notre connaissance du tissu économique local, 
+          nous nous positionnons comme un partenaire de confiance pour toutes vos problématiques IT. 
+          De la PME à l'administration, nous mettons notre savoir-faire au service de votre réussite.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 lg:py-32 bg-card border-t border-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16">
+        <!-- Contact Info -->
+        <div>
+          <p class="text-primary font-medium mb-4">Contact</p>
+          <h2 class="text-3xl sm:text-4xl font-bold mb-6">
+            Parlons de votre <span class="gradient-text">projet</span>
+          </h2>
+          <p class="text-muted-foreground leading-relaxed mb-8">
+            Vous avez un projet ou une question ? N'hésitez pas à nous contacter. 
+            Notre équipe vous répondra dans les plus brefs délais.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Email</p>
+                <a href="mailto:contact@engineirie.com" class="font-medium hover:text-primary transition-colors">contact@engineirie.com</a>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Téléphone</p>
+                <a href="tel:+594594140950" class="font-medium hover:text-primary transition-colors">+594 594 14 09 50</a>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Localisation</p>
+                <p class="font-medium">Guyane française</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="bg-background border border-border rounded-2xl p-8">
+          <form id="contact-form" class="space-y-6">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="firstName" class="block text-sm font-medium mb-2">Prénom</label>
+                <input type="text" id="firstName" name="firstName" required class="w-full px-4 py-3 bg-muted border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Jean">
+              </div>
+              <div>
+                <label for="lastName" class="block text-sm font-medium mb-2">Nom</label>
+                <input type="text" id="lastName" name="lastName" required class="w-full px-4 py-3 bg-muted border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Dupont">
+              </div>
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium mb-2">Email</label>
+              <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-muted border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="jean.dupont@exemple.com">
+            </div>
+            <div>
+              <label for="service" class="block text-sm font-medium mb-2">Service souhaité</label>
+              <select id="service" name="service" class="w-full px-4 py-3 bg-muted border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                <option value="">Sélectionnez un service</option>
+                <option value="infrastructure">Administration Infrastructure Réseau</option>
+                <option value="developpement">Développement Web & Applications</option>
+                <option value="formation">Formation</option>
+                <option value="conseil">Conseil</option>
+                <option value="parc">Gestion de Parc</option>
+                <option value="support">Support Utilisateur</option>
+              </select>
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium mb-2">Message</label>
+              <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 bg-muted border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none" placeholder="Décrivez votre projet ou votre besoin..."></textarea>
+            </div>
+            <button type="submit" class="w-full bg-primary text-primary-foreground py-3 px-6 rounded-lg font-medium hover:bg-primary/90 transition-colors flex items-center justify-center gap-2">
+              Envoyer le message
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </button>
+          </form>
+          <div id="form-success" class="hidden text-center py-8">
+            <div class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Message envoyé !</h3>
+            <p class="text-muted-foreground">Nous vous répondrons dans les plus brefs délais.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <span class="text-lg font-bold">S.A.S Engine Irie</span>
+        </div>
+        
+        <div class="flex items-center gap-6">
+          <a href="#services" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Services</a>
+          <a href="#expertise" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Expertise</a>
+          <a href="#about" class="text-sm text-muted-foreground hover:text-foreground transition-colors">À propos</a>
+          <a href="#contact" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+        </div>
+        
+        <p class="text-sm text-muted-foreground">
+          © 2026 S.A.S Engine Irie. Tous droits réservés.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking a link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Form submission
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Simulate form submission
+      contactForm.classList.add('hidden');
+      formSuccess.classList.remove('hidden');
+      
+      // Reset after 5 seconds
+      setTimeout(() => {
+        contactForm.reset();
+        contactForm.classList.remove('hidden');
+        formSuccess.classList.add('hidden');
+      }, 5000);
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'all 0.5s ease-out';
+      observer.observe(card);
+    });
+  </script>
+
+</body>
+</html>
