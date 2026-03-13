@@ -1,0 +1,257 @@
+# =============================================================================
+# .htaccess — Engine Irie
+# Sécurité complète : HTTPS, anti-injection, protection fichiers, headers
+# =============================================================================
+
+# ── 1. FORCER HTTPS ───────────────────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Rediriger HTTP → HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP_HOST} !^localhost [NC]
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # Rediriger www → non-www (décommenter si besoin)
+    # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    # RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# ── 2. HEADERS DE SÉCURITÉ HTTP ───────────────────────────────────────────────
+<IfModule mod_headers.c>
+    # Empêche le navigateur de deviner le type MIME
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Empêche l'intégration en iframe (anti clickjacking)
+    Header always set X-Frame-Options "DENY"
+
+    # Active le filtre XSS des anciens navigateurs
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Politique de référent stricte
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # HSTS — décommenter uniquement si HTTPS est confirmé et stable
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # Content Security Policy — protège contre les injections XSS
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+
+    # Désactive les cross-domain policies Flash/PDF
+    Header always set X-Permitted-Cross-Domain-Policies "none"
+
+    # Supprime la signature PHP/serveur dans les réponses
+    Header unset X-Powered-By
+    Header always unset X-Powered-By
+</IfModule>
+
+# ── 3. CACHER LA SIGNATURE DU SERVEUR ────────────────────────────────────────
+ServerSignature Off
+
+# ── 4. BLOQUER L'ACCÈS AUX FICHIERS SENSIBLES ────────────────────────────────
+<FilesMatch "(\.json|\.log|\.sql|\.bak|\.env|\.git|\.htpasswd|\.DS_Store|composer\.lock)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Bloquer tous les .php sauf save-consent.php
+<FilesMatch "\.php$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+<Files "save-consent.php">
+    <IfModule mod_authz_core.c>
+        Require all granted
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Deny,Allow
+        Allow from all
+    </IfModule>
+</Files>
+
+# ── 5. PROTECTION DES FICHIERS HTML CONTRE L'INJECTION ───────────────────────
+<FilesMatch "\.html?$">
+    <IfModule mod_headers.c>
+        Header always set X-Content-Type-Options "nosniff"
+        Header always set X-XSS-Protection "1; mode=block"
+        Header always set Cache-Control "no-store, no-cache, must-revalidate"
+        Header always set Pragma "no-cache"
+    </IfModule>
+</FilesMatch>
+
+# ── 6. DÉSACTIVER LE LISTAGE DES RÉPERTOIRES ─────────────────────────────────
+Options -Indexes -ExecCGI
+
+# ── 7. BLOQUER LES USER-AGENTS MALVEILLANTS CONNUS ───────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_USER_AGENT} (sqlmap|nikto|nmap|masscan|zgrab|python-requests|curl\/[0-2]\.|libwww-perl|scrapy|wget) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ── 8. BLOQUER LES TENTATIVES D'INJECTION DANS L'URL ─────────────────────────
+<IfModule mod_rewrite.c>
+    # Traversée de répertoire
+    RewriteCond %{REQUEST_URI} (\.\./|\.\.\\) [NC]
+    RewriteRule .* - [F,L]
+
+    # Injection SQL dans l'URL
+    RewriteCond %{QUERY_STRING} (union.*select|insert.*into|drop.*table|script.*>|<.*script) [NC]
+    RewriteRule .* - [F,L]
+
+    # Tentatives XSS dans l'URL
+    RewriteCond %{QUERY_STRING} (<script|javascript:|vbscript:|onload=|onerror=) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ── 9. LIMITER LES MÉTHODES HTTP AUTORISÉES ──────────────────────────────────
+<LimitExcept GET POST OPTIONS>
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Deny from all
+    </IfModule>
+</LimitExcept>
+
+# ── 10. TAILLE MAX DES REQUÊTES (anti flood / DoS) ───────────────────────────
+LimitRequestBody 102400
+# =============================================================================
+# Protection Engine Irie — auto-généré
+# =============================================================================
+
+# ── 1. FORCER HTTPS ───────────────────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Rediriger HTTP → HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP_HOST} !^localhost [NC]
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # Rediriger www → non-www (optionnel, adapter si besoin)
+    # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    # RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# ── 2. HEADERS DE SÉCURITÉ HTTP ───────────────────────────────────────────────
+<IfModule mod_headers.c>
+    # Empêche le navigateur de deviner le type MIME (anti sniffing)
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Empêche l'intégration en iframe (anti clickjacking)
+    Header always set X-Frame-Options "DENY"
+
+    # Active le filtre XSS des anciens navigateurs
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Politique de référent stricte
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # HSTS : force HTTPS pendant 1 an (activer seulement si HTTPS confirmé)
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # Content Security Policy — protège contre les injections XSS
+    # Adapte 'self' si tu charges des ressources externes
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+
+    # Désactive la détection de type MIME pour les scripts
+    Header always set X-Permitted-Cross-Domain-Policies "none"
+
+    # Supprime la signature du serveur dans les réponses
+    Header unset X-Powered-By
+    Header always unset X-Powered-By
+</IfModule>
+
+# ── 3. CACHER LA SIGNATURE DU SERVEUR ────────────────────────────────────────
+ServerSignature Off
+
+# ── 4. BLOQUER L'ACCÈS AUX FICHIERS SENSIBLES ────────────────────────────────
+# Bloquer .json, .log, .sql, .bak, .env, .git, fichiers cachés
+<FilesMatch "(\.json|\.log|\.sql|\.bak|\.env|\.git|\.htpasswd|\.DS_Store|composer\.lock)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Bloquer tous les .php sauf save-consent.php
+<FilesMatch "\.php$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+<Files "save-consent.php">
+    <IfModule mod_authz_core.c>
+        Require all granted
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Deny,Allow
+        Allow from all
+    </IfModule>
+</Files>
+
+# ── 5. PROTECTION DES FICHIERS HTML CONTRE L'INJECTION ───────────────────────
+<FilesMatch "\.html?$">
+    <IfModule mod_headers.c>
+        # Empêche le navigateur d'exécuter du contenu injecté
+        Header always set X-Content-Type-Options "nosniff"
+        Header always set X-XSS-Protection "1; mode=block"
+        # Pas de mise en cache des pages HTML (évite le cache poisoning)
+        Header always set Cache-Control "no-store, no-cache, must-revalidate"
+        Header always set Pragma "no-cache"
+    </IfModule>
+</FilesMatch>
+
+# ── 6. DÉSACTIVER LE LISTAGE DES RÉPERTOIRES ─────────────────────────────────
+Options -Indexes -ExecCGI
+
+# ── 7. BLOQUER LES USER-AGENTS MALVEILLANTS CONNUS ───────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_USER_AGENT} (sqlmap|nikto|nmap|masscan|zgrab|python-requests|curl\/[0-2]\.|libwww-perl|scrapy|wget) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ── 8. BLOQUER LES TENTATIVES D'INJECTION DANS L'URL ─────────────────────────
+<IfModule mod_rewrite.c>
+    # Bloquer les tentatives de traversée de répertoire
+    RewriteCond %{REQUEST_URI} (\.\./|\.\.\\) [NC]
+    RewriteRule .* - [F,L]
+
+    # Bloquer les injections SQL communes dans l'URL
+    RewriteCond %{QUERY_STRING} (union.*select|insert.*into|drop.*table|script.*>|<.*script) [NC]
+    RewriteRule .* - [F,L]
+
+    # Bloquer les tentatives XSS dans l'URL
+    RewriteCond %{QUERY_STRING} (<script|javascript:|vbscript:|onload=|onerror=) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ── 9. LIMITER LES MÉTHODES HTTP AUTORISÉES ──────────────────────────────────
+<LimitExcept GET POST OPTIONS>
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Deny from all
+    </IfModule>
+</LimitExcept>
+
+# ── 10. TAILLE MAX DES REQUÊTES (anti flood) ─────────────────────────────────
+LimitRequestBody 102400
