@@ -77,6 +77,26 @@
             .nav-link:hover::after {
                 width: 100%;
             }
+
+            @media (max-width: 768px) {
+                .footer-grid {
+                    grid-template-columns: 1fr !important;
+                    gap: 28px !important;
+                }
+                .footer-bottom {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                }
+            }
+            @media (max-width: 480px) {
+                .footer-legal {
+                    flex-wrap: wrap;
+                    gap: 12px !important;
+                }
+            }
+            .footer-nav-link:hover {
+                color: #fafafa !important;
+            }
             @keyframes fadeInUp {
                 from {
                     opacity: 0;
@@ -218,15 +238,19 @@
 
         <!-- Hero Section -->
         <section class="min-h-screen flex items-center pt-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div
+                class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-32"
+            >
+                <div
+                    class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+                >
                     <!-- Left Content -->
                     <div class="opacity-0 animate-fade-in-up">
                         <p class="text-primary font-medium mb-4">
                             S.A.S Engine Irie
                         </p>
                         <h1
-                            class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+                            class="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6"
                         >
                             Votre partenaire
                             <span class="gradient-text">technologique</span>
@@ -273,34 +297,34 @@
                         class="grid grid-cols-2 gap-4 opacity-0 animate-fade-in-up animate-delay-200"
                     >
                         <div
-                            class="bg-card border border-border rounded-2xl p-6"
+                            class="bg-card border border-border rounded-2xl p-4 sm:p-6"
                         >
                             <p
-                                class="text-3xl lg:text-4xl font-bold text-primary mb-2"
+                                class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-2"
                             >
-                                15+
+                                10+
                             </p>
                             <p class="text-muted-foreground text-sm">
                                 Années d'expérience
                             </p>
                         </div>
                         <div
-                            class="bg-card border border-border rounded-2xl p-6"
+                            class="bg-card border border-border rounded-2xl p-4 sm:p-6"
                         >
                             <p
-                                class="text-3xl lg:text-4xl font-bold text-primary mb-2"
+                                class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-2"
                             >
-                                200+
+                                42+
                             </p>
                             <p class="text-muted-foreground text-sm">
                                 Projets réalisés
                             </p>
                         </div>
                         <div
-                            class="bg-card border border-border rounded-2xl p-6"
+                            class="bg-card border border-border rounded-2xl p-4 sm:p-6"
                         >
                             <p
-                                class="text-3xl lg:text-4xl font-bold text-primary mb-2"
+                                class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-2"
                             >
                                 98%
                             </p>
@@ -309,10 +333,10 @@
                             </p>
                         </div>
                         <div
-                            class="bg-card border border-border rounded-2xl p-6"
+                            class="bg-card border border-border rounded-2xl p-4 sm:p-6"
                         >
                             <p
-                                class="text-3xl lg:text-4xl font-bold text-primary mb-2"
+                                class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-2"
                             >
                                 24/7
                             </p>
@@ -326,11 +350,16 @@
         </section>
 
         <!-- Services Section -->
-        <section id="services" class="py-20 lg:py-32 border-t border-border">
+        <section
+            id="services"
+            class="py-12 sm:py-20 lg:py-32 border-t border-border"
+        >
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
+                <div class="text-center mb-8 sm:mb-16">
                     <p class="text-primary font-medium mb-4">Nos services</p>
-                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                    <h2
+                        class="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6"
+                    >
                         Des solutions complètes pour<br
                             class="hidden sm:block"
                         />
@@ -345,10 +374,12 @@
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+                >
                     <!-- Service 1 -->
                     <div
-                        class="service-card bg-card border border-border rounded-2xl p-8"
+                        class="service-card bg-card border border-border rounded-2xl p-5 sm:p-8"
                     >
                         <div
                             class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6"
@@ -400,7 +431,7 @@
 
                     <!-- Service 2 -->
                     <div
-                        class="service-card bg-card border border-border rounded-2xl p-8"
+                        class="service-card bg-card border border-border rounded-2xl p-5 sm:p-8"
                     >
                         <div
                             class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6"
@@ -452,7 +483,7 @@
 
                     <!-- Service 3 -->
                     <div
-                        class="service-card bg-card border border-border rounded-2xl p-8"
+                        class="service-card bg-card border border-border rounded-2xl p-5 sm:p-8"
                     >
                         <div
                             class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6"
@@ -502,7 +533,7 @@
 
                     <!-- Service 4 -->
                     <div
-                        class="service-card bg-card border border-border rounded-2xl p-8"
+                        class="service-card bg-card border border-border rounded-2xl p-5 sm:p-8"
                     >
                         <div
                             class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6"
@@ -552,7 +583,7 @@
 
                     <!-- Service 5 -->
                     <div
-                        class="service-card bg-card border border-border rounded-2xl p-8"
+                        class="service-card bg-card border border-border rounded-2xl p-5 sm:p-8"
                     >
                         <div
                             class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6"
@@ -604,7 +635,7 @@
 
                     <!-- Service 6 -->
                     <div
-                        class="service-card bg-card border border-border rounded-2xl p-8"
+                        class="service-card bg-card border border-border rounded-2xl p-5 sm:p-8"
                     >
                         <div
                             class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6"
@@ -660,10 +691,12 @@
         <!-- Expertise Section -->
         <section
             id="expertise"
-            class="py-20 lg:py-32 bg-card border-y border-border"
+            class="py-12 sm:py-20 lg:py-32 bg-card border-y border-border"
         >
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div
+                    class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center"
+                >
                     <div>
                         <p class="text-primary font-medium mb-4">
                             Notre expertise
@@ -772,9 +805,9 @@
                     </div>
 
                     <!-- Tech Stack Grid -->
-                    <div class="grid grid-cols-3 gap-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                         <div
-                            class="bg-background border border-border rounded-xl p-6 text-center"
+                            class="bg-background border border-border rounded-xl p-4 sm:p-6 text-center"
                         >
                             <div
                                 class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3"
@@ -796,7 +829,7 @@
                             <p class="text-sm font-medium">Windows Server</p>
                         </div>
                         <div
-                            class="bg-background border border-border rounded-xl p-6 text-center"
+                            class="bg-background border border-border rounded-xl p-4 sm:p-6 text-center"
                         >
                             <div
                                 class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3"
@@ -818,7 +851,7 @@
                             <p class="text-sm font-medium">Linux</p>
                         </div>
                         <div
-                            class="bg-background border border-border rounded-xl p-6 text-center"
+                            class="bg-background border border-border rounded-xl p-4 sm:p-6 text-center"
                         >
                             <div
                                 class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3"
@@ -840,7 +873,7 @@
                             <p class="text-sm font-medium">Cloud</p>
                         </div>
                         <div
-                            class="bg-background border border-border rounded-xl p-6 text-center"
+                            class="bg-background border border-border rounded-xl p-4 sm:p-6 text-center"
                         >
                             <div
                                 class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3"
@@ -862,7 +895,7 @@
                             <p class="text-sm font-medium">Cybersécurité</p>
                         </div>
                         <div
-                            class="bg-background border border-border rounded-xl p-6 text-center"
+                            class="bg-background border border-border rounded-xl p-4 sm:p-6 text-center"
                         >
                             <div
                                 class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3"
@@ -884,7 +917,7 @@
                             <p class="text-sm font-medium">Bases de données</p>
                         </div>
                         <div
-                            class="bg-background border border-border rounded-xl p-6 text-center"
+                            class="bg-background border border-border rounded-xl p-4 sm:p-6 text-center"
                         >
                             <div
                                 class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3"
@@ -911,7 +944,7 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-20 lg:py-32">
+        <section id="about" class="py-12 sm:py-20 lg:py-32">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-3xl mx-auto text-center">
                     <p class="text-primary font-medium mb-4">À propos</p>
@@ -940,10 +973,10 @@
         <!-- Contact Section -->
         <section
             id="contact"
-            class="py-20 lg:py-32 bg-card border-t border-border"
+            class="py-12 sm:py-20 lg:py-32 bg-card border-t border-border"
         >
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid lg:grid-cols-2 gap-16">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
                     <!-- Contact Info -->
                     <div>
                         <p class="text-primary font-medium mb-4">Contact</p>
@@ -981,13 +1014,9 @@
                                         Email
                                     </p>
                                     <a
-                                        href="/cdn-cgi/l/email-protection#62010d0c1603011622070c050b0c070b100b074c010d0f"
+                                        href="mailto:contact@engineirie.com"
                                         class="font-medium hover:text-primary transition-colors"
-                                        ><span
-                                            class="__cf_email__"
-                                            data-cfemail="caa9a5a4beaba9be8aafa4ada3a4afa3b8a3afe4a9a5a7"
-                                            >[email&#160;protected]</span
-                                        ></a
+                                        >contact@engineirie.com</a
                                     >
                                 </div>
                             </div>
@@ -1015,9 +1044,9 @@
                                         Téléphone
                                     </p>
                                     <a
-                                        href="tel:+594594140950"
+                                        href="tel:+594594960790"
                                         class="font-medium hover:text-primary transition-colors"
-                                        >+594 594 14 09 50</a
+                                        >+594 594 96 07 90</a
                                     >
                                 </div>
                             </div>
@@ -1058,7 +1087,7 @@
 
                     <!-- Contact Form -->
                     <div
-                        class="bg-background border border-border rounded-2xl p-8"
+                        class="bg-background border border-border rounded-2xl p-5 sm:p-8"
                     >
                         <form id="contact-form" class="space-y-6">
                             <div class="grid sm:grid-cols-2 gap-4">
@@ -1106,6 +1135,20 @@
                                     required
                                     class="w-full px-4 py-3 bg-muted border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                                     placeholder="jean.dupont@exemple.com"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    for="phone"
+                                    class="block text-sm font-medium mb-2"
+                                    >Téléphone</label
+                                >
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    class="w-full px-4 py-3 bg-muted border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                    placeholder="+594 694 00 00 00"
                                 />
                             </div>
                             <div>
@@ -1227,85 +1270,410 @@
         </section>
 
         <!-- Footer -->
-        <footer class="py-12 border-t border-border">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <footer
+            style="
+                background: #0f0f0f;
+                border-top: 0.5px solid #27272a;
+                padding: 48px 24px 28px;
+                font-family: &quot;Inter&quot;, system-ui, sans-serif;
+            "
+        >
+            <div style="max-width: 1100px; margin: 0 auto">
                 <div
-                    class="flex flex-col md:flex-row items-center justify-between gap-6"
+                    class="footer-grid"
+                    style="
+                        display: grid;
+                        grid-template-columns: 1.8fr 1fr 1fr;
+                        gap: 40px;
+                        margin-bottom: 40px;
+                    "
                 >
-                    <div class="flex items-center gap-3">
-                        <div
-                            class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center"
+                    <!-- Brand -->
+                    <div>
+                        <a
+                            href="#"
+                            style="
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                text-decoration: none;
+                            "
                         >
-                            <svg
-                                class="w-6 h-6 text-primary-foreground"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
+                            <div
+                                style="
+                                    width: 36px;
+                                    height: 36px;
+                                    background: #0ea5e9;
+                                    border-radius: 8px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    flex-shrink: 0;
+                                "
                             >
-                                <path
+                                <svg
+                                    width="18"
+                                    height="18"
+                                    fill="none"
+                                    stroke="white"
+                                    stroke-width="2.2"
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                                ></path>
-                            </svg>
-                        </div>
-                        <span class="text-lg font-bold">S.A.S Engine Irie</span>
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div
+                                    style="
+                                        font-size: 16px;
+                                        font-weight: 700;
+                                        color: #fafafa;
+                                    "
+                                >
+                                    Engine Irie
+                                </div>
+                                <div
+                                    style="
+                                        font-size: 11px;
+                                        color: #71717a;
+                                        letter-spacing: 0.5px;
+                                    "
+                                >
+                                    S.A.S · Guyane française
+                                </div>
+                            </div>
+                        </a>
+                        <p
+                            style="
+                                font-size: 14px;
+                                color: #71717a;
+                                line-height: 1.7;
+                                margin: 14px 0 16px;
+                                max-width: 280px;
+                            "
+                        >
+                            Solutions informatiques complètes pour les
+                            entreprises en Guyane française — infrastructure,
+                            développement, formation et support.
+                        </p>
+                        <span
+                            style="
+                                display: inline-flex;
+                                align-items: center;
+                                gap: 6px;
+                                background: rgba(14, 165, 233, 0.08);
+                                border: 0.5px solid rgba(14, 165, 233, 0.2);
+                                border-radius: 20px;
+                                padding: 4px 10px;
+                                font-size: 11px;
+                                color: #38bdf8;
+                            "
+                        >
+                            <span
+                                style="
+                                    width: 6px;
+                                    height: 6px;
+                                    background: #22c55e;
+                                    border-radius: 50%;
+                                    display: inline-block;
+                                "
+                            ></span>
+                            Support disponible 24/7
+                        </span>
                     </div>
 
-                    <div
-                        class="flex flex-wrap items-center justify-center gap-6"
-                    >
+                    <!-- Navigation -->
+                    <div>
+                        <p
+                            style="
+                                font-size: 11px;
+                                font-weight: 700;
+                                letter-spacing: 1.5px;
+                                text-transform: uppercase;
+                                color: #52525b;
+                                margin-bottom: 16px;
+                            "
+                        >
+                            Navigation
+                        </p>
                         <a
                             href="#services"
-                            class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            class="footer-nav-link"
+                            style="
+                                display: block;
+                                font-size: 13px;
+                                color: #71717a;
+                                text-decoration: none;
+                                margin-bottom: 10px;
+                            "
                             >Services</a
                         >
                         <a
                             href="#expertise"
-                            class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            class="footer-nav-link"
+                            style="
+                                display: block;
+                                font-size: 13px;
+                                color: #71717a;
+                                text-decoration: none;
+                                margin-bottom: 10px;
+                            "
                             >Expertise</a
                         >
                         <a
                             href="#about"
-                            class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            class="footer-nav-link"
+                            style="
+                                display: block;
+                                font-size: 13px;
+                                color: #71717a;
+                                text-decoration: none;
+                                margin-bottom: 10px;
+                            "
                             >À propos</a
                         >
                         <a
                             href="#contact"
-                            class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            class="footer-nav-link"
+                            style="
+                                display: block;
+                                font-size: 13px;
+                                color: #71717a;
+                                text-decoration: none;
+                                margin-bottom: 10px;
+                            "
                             >Contact</a
                         >
-                        <span class="hidden sm:inline text-border">|</span>
+                        <a
+                            href="demande-devis.html"
+                            style="
+                                display: block;
+                                font-size: 13px;
+                                color: #0ea5e9;
+                                text-decoration: none;
+                                margin-top: 6px;
+                            "
+                            >Devis gratuit →</a
+                        >
+                    </div>
+
+                    <!-- Contact -->
+                    <div>
+                        <p
+                            style="
+                                font-size: 11px;
+                                font-weight: 700;
+                                letter-spacing: 1.5px;
+                                text-transform: uppercase;
+                                color: #52525b;
+                                margin-bottom: 16px;
+                            "
+                        >
+                            Nous contacter
+                        </p>
+                        <div
+                            style="
+                                display: flex;
+                                align-items: center;
+                                gap: 8px;
+                                margin-bottom: 10px;
+                            "
+                        >
+                            <div
+                                style="
+                                    width: 28px;
+                                    height: 28px;
+                                    background: rgba(14, 165, 233, 0.1);
+                                    border-radius: 6px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    flex-shrink: 0;
+                                "
+                            >
+                                <svg
+                                    width="13"
+                                    height="13"
+                                    fill="none"
+                                    stroke="#0ea5e9"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                    />
+                                </svg>
+                            </div>
+                            <a
+                                href="mailto:contact@engineirie.com"
+                                style="
+                                    font-size: 13px;
+                                    color: #a1a1aa;
+                                    text-decoration: none;
+                                "
+                                >contact@engineirie.com</a
+                            >
+                        </div>
+                        <div
+                            style="
+                                display: flex;
+                                align-items: center;
+                                gap: 8px;
+                                margin-bottom: 10px;
+                            "
+                        >
+                            <div
+                                style="
+                                    width: 28px;
+                                    height: 28px;
+                                    background: rgba(14, 165, 233, 0.1);
+                                    border-radius: 6px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    flex-shrink: 0;
+                                "
+                            >
+                                <svg
+                                    width="13"
+                                    height="13"
+                                    fill="none"
+                                    stroke="#0ea5e9"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                    />
+                                </svg>
+                            </div>
+                            <a
+                                href="tel:+594594960790"
+                                style="
+                                    font-size: 13px;
+                                    color: #a1a1aa;
+                                    text-decoration: none;
+                                "
+                                >+594 594 96 07 90</a
+                            >
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 8px"
+                        >
+                            <div
+                                style="
+                                    width: 28px;
+                                    height: 28px;
+                                    background: rgba(14, 165, 233, 0.1);
+                                    border-radius: 6px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    flex-shrink: 0;
+                                "
+                            >
+                                <svg
+                                    width="13"
+                                    height="13"
+                                    fill="none"
+                                    stroke="#0ea5e9"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                    />
+                                    <path
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                </svg>
+                            </div>
+                            <span style="font-size: 13px; color: #a1a1aa"
+                                >Guyane française</span
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <hr
+                    style="
+                        border: none;
+                        border-top: 0.5px solid #1f1f1f;
+                        margin: 0 0 20px;
+                    "
+                />
+
+                <div
+                    class="footer-bottom"
+                    style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+                        gap: 12px;
+                    "
+                >
+                    <p style="font-size: 12px; color: #3f3f46; margin: 0">
+                        © 2026 S.A.S Engine Irie. Tous droits réservés.
+                    </p>
+                    <div
+                        style="
+                            display: flex;
+                            align-items: center;
+                            gap: 16px;
+                            flex-wrap: wrap;
+                        "
+                    >
                         <a
                             href="mentions-legales.html"
-                            class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            style="
+                                font-size: 12px;
+                                color: #3f3f46;
+                                text-decoration: none;
+                            "
                             >Mentions légales</a
                         >
+                        <span style="font-size: 12px; color: #27272a">·</span>
                         <a
                             href="politique-confidentialite.html"
-                            class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            style="
+                                font-size: 12px;
+                                color: #3f3f46;
+                                text-decoration: none;
+                            "
                             >Confidentialité</a
                         >
-                        <!-- Lien pour rouvrir les paramètres cookies à tout moment -->
+                        <span style="font-size: 12px; color: #27272a">·</span>
                         <a
                             href="#"
                             onclick="
                                 CookieConsent.openSettings();
                                 return false;
                             "
-                            class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            style="
+                                font-size: 12px;
+                                color: #3f3f46;
+                                text-decoration: none;
+                            "
                             >Cookies</a
                         >
                     </div>
-
-                    <p class="text-sm text-muted-foreground">
-                        © 2026 S.A.S Engine Irie. Tous droits réservés.
-                    </p>
                 </div>
             </div>
         </footer>
 
+        <script
+            data-cfasync="false"
+            src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+        ></script>
         <script
             data-cfasync="false"
             src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
@@ -1338,14 +1706,17 @@
                 const originalBtnHTML = submitBtn.innerHTML;
                 submitBtn.disabled = true;
                 submitBtn.innerHTML =
-                    '<svg class="w-4 h-4 inline mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>Envoi en cours...';
+                    '<svg class="w-4 h-4 inline mr-2 animate-spin" fill="none" stroke="currentColor" viewBo1-15.357-2m15.357 2H15"></path></svg>Envoi en cours...';
 
                 const templateParams = {
                     from_name:
                         document.getElementById("firstName").value +
                         " " +
                         document.getElementById("lastName").value,
-                    from_email: document.getElementById("email").value,
+                    email: document.getElementById("email").value,
+                    phone:
+                        document.getElementById("phone").value ||
+                        "Non renseigné",
                     service:
                         document.getElementById("service").value ||
                         "Non précisé",
